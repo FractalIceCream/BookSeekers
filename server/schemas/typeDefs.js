@@ -4,28 +4,55 @@ const typeDefs = `
         username: String
         email: String
         password: String
-        savedBooks: [String]!
+        savedBooks: [Book]
+        bookCount: Int
     },
+
+    type Book {
+        bookId: String!
+        authors: [String]
+        description: String
+        title: String
+        image: String
+        link: String
+    }
 
     type Auth {
         token: ID!
         user: User
     },
 
+    input BookInput {
+        bookId: String!
+        authors: [String]
+        description: String
+        title: String
+        image: String
+        link: String
+    }
+
     type Query {
         users: [User]!
-        user(userId: ID!): User
+        user(userId: ID): User
         me: User
     }
 
     type Mutation {
-        createUser(username: String!, email: String!, password: String!): Auth
+        addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
 
-        addBook(userId: ID!, book: String!): User
+        saveBook(userId: ID, book: BookInput!): User
         #removeUser(userId: ID!): User
-        removeBook(userId: ID!, book: String!): User
+        removeBook(userId: ID, bookId: String!): User
     }
 `;
 
 module.exports = typeDefs;
+
+// {
+//     bookId: 'jaM7DwAAQBAJ', 
+//     authors: Array(1), 
+//     title: "Ender's Game", 
+//     description: '"The classic of modern science fiction"--Front cover.', 
+//     image: 'http://books.google.com/books/content?id=jaM7DwAAQ…=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'
+// }
