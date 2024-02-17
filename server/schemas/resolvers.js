@@ -6,13 +6,21 @@ const resolvers = {
         users: async () => {
             return User.find();
         },
-        user: async (parent, { user = null, params }) => {
-            return User.findOne({
-                $or: [
-                    { _id: user ? user._id : params.id },
-                    { username: params.username },
-                ],
-            });
+        user: async (parent, {userId}) => {
+            return User.findOne({_id: userId});
+        },
+        me: async (parent, userId, context) => {
+            console.log(context.user);
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('savedBooks');
+
+            }
+            throw AuthenticationError;
+            //     $or: [
+            //         { _id: user ? user._id : params.id },
+            //         { username: params.username },
+            //     ],
+            // });
         },
     },
 
@@ -28,7 +36,7 @@ const resolvers = {
 
             // (parent, { email, password }) => {
             const user = await User.findOne({ email });
-             // $or: [{ username, email }],
+            // $or: [{ username, email }],
 
             if (!user) throw AuthenticationError;
 
