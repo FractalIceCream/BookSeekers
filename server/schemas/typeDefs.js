@@ -41,18 +41,10 @@ const typeDefs = `
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
 
-        saveBook(userId: ID, book: BookInput!): User
+        saveBook(book: BookInput!): User
         #removeUser(userId: ID!): User
-        removeBook(userId: ID, bookId: String!): User
+        removeBook(bookId: String!): User
     }
 `;
 
 module.exports = typeDefs;
-
-// {
-//     bookId: 'jaM7DwAAQBAJ', 
-//     authors: Array(1), 
-//     title: "Ender's Game", 
-//     description: '"The classic of modern science fiction"--Front cover.', 
-//     image: 'http://books.google.com/books/content?id=jaM7DwAAQ…=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'
-// }
