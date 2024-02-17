@@ -29,13 +29,10 @@ const LoginForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-    // console.log({...userFormData});
     try {
       const { data } = await login({
         variables: { ...userFormData }
       });
-
-      console.log({data});
       // const response = await loginUser(userFormData);
 
       // if (!response.ok) {
@@ -43,7 +40,6 @@ const LoginForm = () => {
       // }
 
       // const { token, user } = await response.json();
-      // console.log(user);
       // Auth.login(token);
       Auth.login(data.login.token);
 
