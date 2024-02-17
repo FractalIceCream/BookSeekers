@@ -1,14 +1,6 @@
-// // route to get logged in user's info (needs the token)
-// export const getMe = (token) => {
-//     return fetch('/api/users/me', {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         authorization: `Bearer ${token}`,
-//       },
-//     });
-//   };
-
 import { gql } from '@apollo/client';
+
+//troubleshooting 
 export const GET_SINGLE_USER = gql`
 query Query($userId: ID) {
     user(userId: $userId) {
@@ -27,7 +19,6 @@ query Query($userId: ID) {
       bookCount
     }
 }`;
-
 
 export const GET_ME = gql`
 query me {
